@@ -29,7 +29,7 @@ var Player =
     magic: 50,
     magicType: ["fire", "water", "grass"],
     weapons: ["sword", "bow"],
-    items: ["potion", "elixir", "gold"],
+    items: ["potion", "elixir", "gold", "armor"],
     potionCount: 1,
     elixirCount: 1,
     goldCount: 100,
@@ -55,7 +55,6 @@ var commonEnemy =
     speed: 50,
     power: 5,
     enemyType: "Common",
-    enemyDeath: "Common",
 
     CommonAttack: function (power)
     {
@@ -77,6 +76,7 @@ var fireEnemy =
     health: 50,
     speed: 50,
     power: 8,
+    enemyType: "Fire",
 
     FireAttack: function (power)
     {
@@ -98,6 +98,7 @@ var waterEnemy =
     health: 50,
     speed: 50,
     power: 9,
+    enemyType: "Water",
 
     WaterAttack: function (power)
     {
@@ -210,15 +211,85 @@ alert("Out of nowhere, a code monster appears!");
 
 //Battle 1
 
-
+alert("A " + commonEnemy.enemyType + "code monster appeared!  What will you do?");
 
 function BattlePrompt ()
 {
-    alert("A" + commonEnemy.enemyType + "code monster appeared!  What will you do?");
     var battleChoice = prompt("Attack     Magic     Item     ");
-}
+    switch (battleChoice)
+    {
+        case 1: 
+            if (battleChoice == 'Attack' || 'attack' || 'ATTACK')
+            {
+                var weaponChoice = prompt("What weapon do you wish to use? (sword or bow)");
+                switch (weaponChoice)
+                {
+                    case 1:
+                        var weaponChoice = 'sword' || 'Sword' || 'SWORD';
+                        alert("You attack with your " + Player.weapons[0] + ".")
+                        break;
+                }
+            }
+        break;
+        case 2:
+            if (battleChoice == 'Magic' || 'magic' || 'MAGIC')
+            {    
+                var magicChoice = prompt("What kind of magic would you like to use? (water, fire, or grass)");
+                switch(magicChoice)
+                {
+                    case 1:
+                    if (magicChoice == 'water' || 'Water' || 'WATER')
+                    {
+                        alert("You used " + Player.magicType[1] + " magic.");
+                    }
+                    break;
+                    case 2: 
+                        if (magicChoice == 'fire' || 'Fire' || 'FIRE')
+                        {
+                            alert("You used " + Player.magicType[0] + " magic.");
+                        }
+                    break;
+                    case 3:
+                        if (magicChoice == 'grass' || 'Grass' || 'GRASS')
+                        {
+                            alert("You used " + Player.magicType[2] + " magic.");
+                        }
+                        break;
+            }
+        break;
 
-if (battleChoice == 'Attack' || 'attack')
-{
-    
-}
+        case 3: 
+            var battleChoice = 'Item' || 'item' || 'ITEM';
+            var itemChoice = prompt("What item would you like to use?",
+            "Health Potion     Elixir     Armor");
+        switch(itemChoice)
+        {
+            case 1:
+                if (itemChoice == 'potion' || 'Potion' || 'POTION')
+                {
+                    alert("You used a potion");
+                    alert("*Restored 25 health*");
+                }
+                break;
+            case 2:
+                var itemChoice = 'elixir' || 'Elixir' || 'ELIXIR';
+                alert("You used an elixir");
+                alert("*Restored 20 magic");
+                break;
+            case 3:
+                var itemChoice = 'armor' || 'Armor' || 'ARMOR';
+                alert("You used Armor");
+                alert("*Restored 50 armor*");
+                break;
+        }
+        break;
+    }
+
+BattlePrompt();
+
+alert("You keep walking forward, the terrifying castle getting closer");
+alert("Out of nowhere, a code monster appears!");
+
+//Battle 2
+
+

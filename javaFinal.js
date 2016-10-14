@@ -1,42 +1,145 @@
+//Devereaux Legakis
+//Anthony Romrell
+//JavaScript Final
+
+
+
 // Player stats
-var Player = function(PlayerStats)
+//var Player = function(PlayerStats)
+//{
+    //var name;
+    //var health = 100;
+    //var armor = 100;
+    //var magic = 50;
+    //var magicType = ["fire", "water", "grass"];
+    //var weapons = ["sword", "bow"];
+    //var items = [potion, elixir, gold];
+    //var potionCount = 1;
+    //var elixirCount = 1;
+    //var goldCount = 100;
+//}
+
+// Player stats
+
+var Player = 
 {
-    var health = 100;
-    var armor = 100;
-    var magic = 50;
-    var magicType = ["fire", "water", "grass"];
-    var weapons = ["sword", "bow"];
-    var items = [potion, elixir, gold];
-    var potionCount = 1;
-    var elixirCount = 1;
-    var goldCount = 100;
+    name,
+    health: 100,
+    armor: 100,
+    magic: 50,
+    magicType: ["fire", "water", "grass"],
+    weapons: ["sword", "bow"],
+    items: ["potion", "elixir", "gold"],
+    potionCount: 1,
+    elixirCount: 1,
+    goldCount: 100,
+
+    SubtractHealth: function (power)
+    {
+        this.health -= power;
+    },
+
+    SubtractArmor: function (power)
+    {
+        this.armor -= power;
+    },
+
+
+}
+
+//Common enemy stats
+
+var commonEnemy = 
+{
+    health: 25,
+    speed: 50,
+    power: 5,
+    enemyType: "Common",
+    enemyDeath: "Common",
+
+    CommonAttack: function (power)
+    {
+        Player.armor -= power;
+        if (Player.armor == 0)
+        {
+            Player.health -= power;
+        }
+    },
+
+    CommonTakeDamage: function ()
+    {
+        this.health -= 10;
+    },
 }
 // Fire enemy stats
-var fireEnemy = function(fireStats)
+var fireEnemy = 
 {
-    var health = 50;
-    var speed = 50;
-    var power = 8;
+    health: 50,
+    speed: 50,
+    power: 8,
+
+    FireAttack: function (power)
+    {
+        Player.armor -= power;
+        if (Player.armor == 0)
+        {
+            Player.health -= power;
+        }
+    },
+
+    FireTakeDamage: function ()
+    {
+        this.health -= 10;
+    },
 }
 // Water enemy stats
-var waterEnemy = function(waterStats)
+var waterEnemy = 
 {
-    var health = 50;
-    var speed = 50;
-    var power = 9;
+    health: 50,
+    speed: 50,
+    power: 9,
+
+    WaterAttack: function (power)
+    {
+        Player.armor -= power;
+        if (Player.armor == 0)
+        {
+            Player.health -= power;
+        }
+    },
+
+    WaterTakeDamage: function ()
+    {
+        this.health -= 10;
+    },
 }
 // Grass enemy stats
-var grassEnemy = function(grassStats)
+var grassEnemy = 
 {
-    var health = 60;
-    var speed = 51;
-    var power = 10;
+    health: 60,
+    speed: 51,
+    power: 10,
+
+    GrassAttack: function (power)
+    {
+        Player.armor -= power;
+        if (Player.armor == 0)
+        {
+            Player.health -= power;
+        }
+    },
+
+    GrassTakeDamage: function ()
+    {
+        this.health -= 10;
+    },
+
 }
 // Shop
-var shop = function(shopStats)
+var shop = 
 {
-    var potionCost = 75;
-    var elixirCost = 100;
+    potionCost: 75,
+    elixirCost: 100,
 }
 // Boss stats
 var boss = function(bossStats)
@@ -47,23 +150,75 @@ var boss = function(bossStats)
     var type = ["fire", "grass", "water"];
 }
 // Adventure Start
-alert = (" 'Welcome stranger!  Our wonderful town of Codeville is being rampaged by corrupted and incorrect javascript files!  You must help us!' ");
-// Name prompt
-prompt = (" 'What is your name, stranger?' ", name);
-// Item get!
-alert = (" 'Thank you for helping us, ", name, ".  Here are some supplies to help you on your journey.' ");
-alert = (" *Obtained ", armor, " armor.*");
-alert = (" *Obtained ", magic, " magic.*");
-alert = (" *Obtained ", weapons[0], " and ", weapons[1], ".*");
-alert = (" *Obtained ", gold, " gold.*");
-// Instructions
-prompt = (" 'Would you like to know how to play?' ", instructions);
-if (instructions == 'yes')
+function adventureStart()
 {
+    alert(" 'Welcome stranger!  Our wonderful town of Codeville is being rampaged by corrupted and incorrect javascript files!  You must help us!' ");
+}
+adventureStart();
+// Name prompt
+var name = prompt(" 'What is your name, stranger?' ");
+// Item get!
+function itemGet()
+{
+    alert(" 'Thank you for helping us, " + name + ".  Here are some supplies to help you on your journey.' ");
+    alert(" *Obtained " + Player.armor + " Armor*");
+    alert(" *Obtained " + Player.magic + " Magic*");
+    alert(" *Obtained " + Player.weapons[0] + " and " + Player.weapons[1] + "*");
+    alert(" *Obtained " + Player.goldCount + " Gold*");
+    alert(" *Obtained " + Player.potionCount + " Potion(s)*");
+    alert(" *Obtained " + Player.elixirCount + " Elixir(s)*");
+}
 
+itemGet();
+
+// Instructions
+
+function instructionFunction()
+{
+    alert(" 'When you engage in a Battle with one of the bad codes, you will have a number of options of what to do.");
+    alert(" 'The first choice is to Attack.  Use this to engage with your enemies and deal damage using your weapons.");
+    alert(" 'Depending on the code monster, you'll want to use different weapons. '");
+    alert(" 'The second thing you can do is use Magic.' ");
+    alert(" 'You'll want to use Magic when a code monster has armor that can't be pierced by your weapons.' ");
+    alert(" 'There are 3 types of magic spells, and 3 different kinds of code monsters, respectively. '");
+    alert(" 'The types of code monsters and spells are Water, Grass, and Fire.' ");
+    alert(" 'Each monster has a weakness to the type of Magic you'd think.  Water is strong against Fire, Fire is strong against Grass, and Grass is strong against Water.' ");
+    alert(" 'You only have so much Magic, however.  So when you begin to run low, use an Elixir, by choosing Items.' ");
+    alert(" 'These code monsters aren't defenseless, however.  And some of them certainly don't tickle.' ");
+    alert(" 'You have armor that can block damage.  However, when your armor is gone, the code monsters will take a toll on your health.' ");
+    alert(" 'When they deal damage, you can heal yourself by using a Potion, which you can also access from Items.' ");
+    alert(" 'This quest is also a high-risk high-reward sort of deal.  When you slay a code monster, they will drop loot, which can vary from Gold to more supplies.' ");
+    alert(" 'The supplies I gave you will not last forever, however.  Luckily on your quest there will be some shops in which you can buy more things using Gold.' ");
+    alert(" 'One last thing.  If you would like to check on your current stats, right click the webpage, click Inspect, then look at the Console Log.' ");
+    alert(" 'Good luck, " + name + ".' ");
+}
+
+var instructions = prompt(" 'Would you like to know how to play?' ", instructions);
+if (instructions == 'yes' || 'Yes' || 'YES')
+{
+    instructionFunction();
 }
 else
 {
-    alert = (" 'Very well.  Good luck on your adventure!' ");
+    alert(" 'Very well.  Good luck on your adventure, " + name + "!' ");
 }
 
+//The quest begins!
+
+alert("You walk towards the looming castle in the distance.");
+alert("Out of nowhere, a code monster appears!");
+
+//Battle 1
+
+
+
+function BattlePrompt ()
+{
+    alert("A" + commonEnemy.enemyType + "code monster appeared!  What will you do?");
+    var battleChoice = prompt("Attack     Magic     Item     ");
+}
+
+if (battleChoice == 'Attack' || 'attack')
+{
+    
+}
